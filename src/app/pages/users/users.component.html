@@ -1,13 +1,7 @@
-<ul class="list-button">
-  <li *ngFor="let user of users">
-    <button
-      routerLink="/users/details"
-      [queryParams]="{
-        username: user
-      }"
-      class="btn btn-primary"
-    >
-      {{ user }}
-    </button>
-  </li>
-</ul>
+<div class="row">
+  <app-user-card
+    *ngFor="let user of users"
+    [user]="user"
+    class="col-md"
+  ></app-user-card>
+</div>
