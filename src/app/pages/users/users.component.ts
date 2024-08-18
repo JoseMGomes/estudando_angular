@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
       nome: ['', [Validators.required, Validators.maxLength(40)]],
       idade: [
         '',
-        [Validators.required, Validators.min(1), Validators.max(110)],
+        [Validators.required, Validators.min(18), Validators.max(80)],
       ],
     });
   }

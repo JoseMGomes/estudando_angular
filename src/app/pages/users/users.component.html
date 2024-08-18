@@ -6,8 +6,23 @@
         id="nome"
         type="text"
         class="form-control"
+        [class.is-invalid]="
+          userForm.get('nome')?.errors && userForm.get('nome')?.touched
+        "
         formControlName="nome"
       />
+      <div
+        *ngIf="userForm.get('nome')?.hasError('required')"
+        class="invalid-feedback"
+      >
+        Nome Obrigatório
+      </div>
+      <div
+        *ngIf="userForm.get('nome')?.hasError('maxlenght')"
+        class="invalid-feedback"
+      >
+        Maximo de Caracteres atingido
+      </div>
     </div>
     <div class="form-group col-md-3">
       <label for="idade">Idade</label>
@@ -15,11 +30,29 @@
         id="idade"
         type="number"
         class="form-control"
+        [class.is-invalid]="
+          userForm.get('idade')?.errors && userForm.get('idade')?.touched
+        "
         formControlName="idade"
       />
+      <div
+        *ngIf="userForm.get('idade')?.hasError('required')"
+        class="invalid-feedback"
+      >
+        Idade Obrigatória
+      </div>
+      <div
+        *ngIf="
+          userForm.get('idade')?.hasError('min') ||
+          userForm.get('idade')?.hasError('max')
+        "
+        class="invalid-feedback"
+      >
+        Idade não permitida, somente de 18 a 80 anos
+      </div>
     </div>
   </div>
-  <button (click)="SubmitForm()" class="btn btn-success mt-3">Incluir</button>
+  <button  [disabled]="!userForm.valid" (click)="SubmitForm()" class="btn btn-success mt-3">Incluir</button>
 </form>
 
 <div class="row">
