@@ -1,16 +1,25 @@
-
-<form class="mb-3">
+<form [formGroup]="userForm" class="mb-3">
   <div class="row">
     <div class="form-group col-md-6">
       <label for="nome">Nome</label>
-      <input id="nome" type="text" class="form-control"/>
+      <input
+        id="nome"
+        type="text"
+        class="form-control"
+        formControlName="nome"
+      />
     </div>
     <div class="form-group col-md-3">
       <label for="idade">Idade</label>
-      <input id="idade" type="number" class="form-control"/>
+      <input
+        id="idade"
+        type="number"
+        class="form-control"
+        formControlName="idade"
+      />
     </div>
   </div>
-  <button class="btn btn-success mt-3">Incluir</button>
+  <button (click)="SubmitForm()" class="btn btn-success mt-3">Incluir</button>
 </form>
 
 <div class="row">
