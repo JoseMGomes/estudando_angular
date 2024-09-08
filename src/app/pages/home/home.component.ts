@@ -1,4 +1,6 @@
+import { ToastrService } from 'ngx-toastr';
 import { User } from '../../_models/user';
+import { UserGit } from '../../_models/userGit';
 import { UserService } from './../../_services/user.service';
 import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 
@@ -7,14 +9,23 @@ import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent implements OnInit {
-  constructor(private userService: UserService) {}
+export class HomeComponent {
+  user: UserGit | undefined;
+  username: string = '';
 
-  ngOnInit(): void {this.getGitUser()}
+  constructor(
+    private userService: UserService,
+    private toastr: ToastrService
+  ) {}
 
   getGitUser() {
-    this.userService.getGitUser('JoseMGomes').subscribe((response: any) => {
-      console.log(response);
-    });
+    this.userService.getGitUser(this.username).subscribe(
+      (response: UserGit) => {
+        this.user = response;
+      },
+      (error) => {
+        this.toastr.error(error.error.message);
+      }
+    );
   }
 }
